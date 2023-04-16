@@ -96,6 +96,7 @@ export default function Detail(props) {
           <p className="text-xl font-bold">
             TextClassification : {data.TextClassification}
           </p>
+          <p className="text-xl font-bold">Fake/Real : {data.fakeorreal}</p>
           <p class="card-text">
             <small class="text-muted">Last updated 3 mins ago</small>
           </p>

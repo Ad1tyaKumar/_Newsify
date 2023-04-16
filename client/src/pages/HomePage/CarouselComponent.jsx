@@ -139,7 +139,7 @@ const CarouselComponent = () => {
                 <SwiperSlide>
                   <div
                     class="card carousel-card carousel-card"
-                    style={{ width: "90%", height: "38rem" }}
+                    style={{ width: "90%", height: "39rem" }}
                   >
                     <img
                       src={i.images}
@@ -166,12 +166,13 @@ const CarouselComponent = () => {
                         </div>
                       </div>
                       <p class="card-text">{i.summary?.slice(0, 240)}...</p>
-                      <p className="text-xl font-bold " >
-                        Sentiment : <span className="text-xl font-bold " style={{color: i.Sentiment === 'Positive' ? 'green' : (i.Sentiment === 'negative' ? 'red' : 'grey')}}>{i.Sentiment}</span> 
+                      <p className="text-lg font-bold " >
+                        Sentiment : <span className="text-lg font-bold " style={{color: i.Sentiment === 'Positive' ? 'green' : (i.Sentiment === 'negative' ? 'red' : 'grey')}}>{i.Sentiment}</span> 
                       </p>
-                      <p className="text-xl font-bold">
+                      <p className="text-lg font-bold">
                         TextClassification : {i.TextClassification}
                       </p>
+                      <p className="text-lg font-bold">Fake/Real : {i.fakeorreal}</p>
 
                       <Link to={`/detail?art=${i.id}`}>
                         <button type="button" class="btn btn-primary card-btn">

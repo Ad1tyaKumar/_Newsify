@@ -91,6 +91,7 @@ export default function Region() {
                     <p className="text-xl font-bold">
                       TextClassification : {i.TextClassification}
                     </p>
+                    <p className="text-xl font-bold">Fake/Real : {i.fakeorreal}</p>
                     <Link to="/detail">
                       <button type="button" class="btn btn-primary card-btn">
                         Read More

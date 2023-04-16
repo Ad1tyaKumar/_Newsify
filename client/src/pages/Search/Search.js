@@ -91,10 +91,10 @@ export default function Search() {
                   <p className="card-text w3-large">
                     {i.summary?.slice(0, 240)}...
                   </p>
-                  <p className="text-xl font-bold ">
+                  <p className="text-lg font-bold ">
                     Sentiment :{" "}
                     <span
-                      className="text-xl font-bold "
+                      className="text-lg font-bold "
                       style={{
                         color:
                           i.Sentiment === "Positive"
@@ -107,9 +107,10 @@ export default function Search() {
                       {i.Sentiment}
                     </span>
                   </p>
-                  <p className="text-xl font-bold">
+                  <p className="text-lg font-bold">
                     TextClassification : {i.TextClassification}
                   </p>
+                  <p className="text-lg font-bold">Fake/Real : {i.fakeorreal}</p>
                   <p className="card-text">
                     <Link to="/detail">
                       <button type="button" class="btn btn-primary card-btn">
