@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import "./../Footer/Footer.scss";
 import {Link} from "react-router-dom";
+// import Searchbar from '../Cricket';
 
 export default function Footer() {
     return (
@@ -11,26 +12,7 @@ export default function Footer() {
     integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA="
     crossOrigin="anonymous"
   />
-  {/* <section className="deneb_cta">
-    <div className="container">
-      <div className="cta_wrapper">
-        <div className="row align-items-center">
-          <div className="col-lg-7">
-            <div className="cta_content">
-              <h3 style={{color:"black", fontSize:"xx-large"}}>Made with <i class="fa-solid fa-heart fa-fade fa-xl" style={{color: "#f60404"}}></i> by <i class="fa-brands fa-bots fa-2xl"></i></h3>
-            </div>
-          </div>
-          <div className="col-lg-5">
-            <div className="button_box">
-              <Link to="/team" className="btn btn-warning">
-                Connect With Us
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> */}
+  
   <footer className="deneb_footer">
     <div
       className="widget_wrapper">
@@ -43,46 +25,46 @@ export default function Footer() {
               </div>
               <p>
               <h2 className='w3-xlarge w3-cursive w3-large'>About NEWSIFY</h2>
-                Quisque orci nisl, viverra et sem ac, tincidunt egestas massa.
-                Morbi est arcu, hendrerit ac vehicula condimentum, euismod nec
-                tortor praesent consequat urna.
+                A perfect website to start your day. Know whats going on around you and round the globe in just on click. We would love to get your feedback and connect with you.
+                
               </p>
+              <Link to="/team" className='w3-xlarge w3-cursive w3-large mb-2'>Give feedback</Link>
               <ul className="social">
                 <li>
-                  <Link to="#">
+                  <Link to="/">
                     <i className="fab fa-facebook-f" />
                   </Link>
                 </li>
                 <li>
-                  <Link to="#">
+                  <Link to="/">
                     <i className="fab fa-twitter" />
                   </Link>
                 </li>
                 <li>
-                  <Link to="#">
+                  <Link to="/">
                     <i className="fab fa-instagram" />
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="col-lg-4 col-md-6 col-sm-12">
-            <div className="widget widget_link">
+          <div className="col-lg-4 col-md-6 col-sm-12 text-white">
+            <div className="widget widget_link ">
               <div className="widget_title">
-                <h4 className='w3-cursive w3-xlarge'>Links</h4>
+                <h4 className='w3-cursive w3-xxlarge'>Links</h4>
               </div>
               <ul>
                 <li>
-                  <Link to="/">About Us</Link>
+                  <Link to="/" className='text-white w3-large'>About Us</Link>
                 </li>
                 <li>
-                  <Link to="/">Services</Link>
+                  <Link to="/" className='text-white w3-large'>Services</Link>
                 </li> 
                 <li>
-                  <Link to="/">FAQ</Link>
+                  <Link to="/" className='text-white w3-large'>FAQ</Link>
                 </li>
                 <li>
-                  <Link to="/">Contribute</Link>
+                  <Link to="/" className='text-white w3-large'>Contribute</Link>
                 </li>
               </ul>
             </div>
@@ -90,7 +72,7 @@ export default function Footer() {
           <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="widget widget_contact">
               <div className="widget_title">
-                <h4 className='w3-cursive w3-xlarge'>Contact Us</h4>
+                <h4 className='w3-cursive w3-xxlarge'>Contact Us</h4>
               </div>
               <div className="contact_info">
                 <div className="single_info">
@@ -99,10 +81,10 @@ export default function Footer() {
                   </div>
                   <div className="info">
                     <p>
-                      <Link to="tel:+918887928417">8887-928-417</Link>
+                      <Link to="tel:+918887928417" className='text-white w3-large'>8887-928-417</Link>
                     </p>
                     <p>
-                      <Link to="tel:+918318268334">831-826-8334</Link>
+                      <Link to="tel:+918318268334" className='text-white w3-large'>831-826-8334</Link>
                     </p>
                   </div>
                 </div>
@@ -112,10 +94,10 @@ export default function Footer() {
                   </div>
                   <div className="info">
                     <p>
-                      <Link to="mailto:richesh.21ug1070@iiitranchi.ac.in">richesh.21ug1070@iiitranchi.ac.in</Link>
+                      <Link to="mailto:richesh.21ug1070@iiitranchi.ac.in" className='text-white w3-medium'>richesh.21ug1070@iiitranchi.ac.in</Link>
                     </p>
                     <p>
-                      <Link to="mailto:aditya.21ug1017@iiitranchi.ac.in">aditya.21ug1017@iiitranchi.ac.in</Link>
+                      <Link to="mailto:aditya.21ug1017@iiitranchi.ac.in" className='text-white w3-medium'>aditya.21ug1017@iiitranchi.ac.in</Link>
                     </p>
                   </div>
                 </div>
@@ -123,7 +105,7 @@ export default function Footer() {
                   <div className="icon">
                     <i className="fas fa-map-marker-alt" />
                   </div>
-                  <div className="info">
+                  <div className="info w3-large">
                     <p>
                       IIIT Ranchi, Dhurwa<span>Ranchi.</span>
                     </p>

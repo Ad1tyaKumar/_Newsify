@@ -43,13 +43,13 @@ const CarouselComponent = () => {
 
   const fetchdata = async () => {
     setLoading(true);
-    // await fetch("https://amiteshpatel.pythonanywhere.com/search/ipl")
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((res) => {
+    await fetch("https://amiteshpatel.pythonanywhere.com/search/ipl")
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
 
-        const data = Object.values(jsn);
+        const data = Object.values(res);
         var temp = [];
 
         for (let i = 0; i < data.length; i++) {
@@ -57,10 +57,10 @@ const CarouselComponent = () => {
         }
         setPosts([...temp]);
         setLoading(false);
-      // })
-      // .catch((err) => {
-      //   console.log(err.message);
-      // });
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   useEffect(() => {
@@ -68,6 +68,7 @@ const CarouselComponent = () => {
   }, []);
 
   useEffect(() => {
+    console.log(posts)
   }, [posts]);
   return (
     <div className="mb-5">
@@ -159,6 +160,7 @@ const CarouselComponent = () => {
                           </div>
                         </div>
                         <p class="card-text">{i.summary?.slice(0, 240)}...</p>
+                        {/* <p class="card-text">{i.summary?.slice(0, 240)}...</p> */}
 
                         <Link to={`/detail?art=${i.id}`}>
                           <button type="button" class="btn btn-primary card-btn">

@@ -12,13 +12,21 @@ export default function Search() {
   const [loading, setLoading] = useState(true);
 
   var url=window.location.href.toString().split("/search/")[1];
+  const urlArray=["World","Nation","BUSINESS", "TECHNOLOGY", "ENTERTAINMENT", "SPORTS", "SCIENCE", "HEALTH"]
+  var title=""
   if(url=="1"||url=="2"||url=="3"||url=="4"||url=="5"||url=="6"||url=="7"||url=="0"){
-    url=`topic_news/${url}`;
+    title=`${urlArray[url]}`
+    url=`https://amiteshpatel.pythonanywhere.com/topic_wise/${url}`;
   }
-
+  else{
+    title=url.toUpperCase();
+    url=`https://amiteshpatel.pythonanywhere.com/search/${url}`
+    
+  }
+ console.log(url)
   const fetchdata = async () => {
     setLoading(true);
-    await fetch(`https://amiteshpatel.pythonanywhere.com/search/ipl`)
+    await fetch(url)
       .then((response) => {
         return response.json();
       })
@@ -52,7 +60,7 @@ export default function Search() {
     
         <Navbar/>
         <h1 className='w3-xxlarge m-5'>SEARCH RESULTS</h1>
-        <h1 className='w3-xlarge mx-5'>POLITICS</h1>
+        <h1 className='w3-xlarge mx-5'>{title}</h1>
         {loading && <Spinner />}
         {posts.map((i)=>{
           return (<div className="card mb-3 m-5 mx-10 w3-border w3-border-black" style={{height:"35%",width:"80%"}} >

@@ -15,7 +15,10 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import backEndUrl from "../../host";
-const options = ['IPL', 'Virat Kohli','abc','medha','politics','trump','war'];
+import Fab from '@mui/material/Fab';
+import SportsCricketIcon from '@mui/icons-material/SportsCricket';
+
+const options = ['IPL', 'Virat Kohli','abc','medha','politics','trump','war','world','local','modi'];
 const Navbar = () => {
   const [value, setValue] = React.useState(options[0]);
   const [inputValue, setInputValue] = React.useState('');
@@ -173,6 +176,10 @@ const Navbar = () => {
                 style={{ color: "#af695c" }}
               ></i>
             </a>
+
+            <Link to="https://www.espncricinfo.com/live-cricket-score"><Box sx={{ '& > :not(style)': { m: 1 } }}><Fab variant="extended" color="black" aria-label="add">
+        <SportsCricketIcon sx={{ mr: 1 }} />
+      </Fab></Box></Link>
 
             <Backdrop
               sx={{
