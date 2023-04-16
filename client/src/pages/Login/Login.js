@@ -6,7 +6,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Fade from "@mui/material/Fade";
 import MuiAlert from "@mui/material/Alert";
 import { Context } from "../..";
-
+import backEndUrl from "../../host";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -35,7 +35,7 @@ export default function Login() {
     try {
       await axios
         .post(
-          "http://localhost:4000/",
+          `${backEndUrl}`,
           { email, password },
           {
             withCredentials: true,

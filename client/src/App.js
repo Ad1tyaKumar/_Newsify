@@ -11,11 +11,11 @@ import Search from "./pages/Search/Search";
 import { Context } from ".";
 import axios from "axios";
 import Region from "./pages/Region/Region";
-
+import backEndUrl from "./host";
 function App() {
   const {setUser,setIsAuthenticated}=useContext(Context);
   useEffect(()=>{
-    axios.get("http://localhost:4000/users",{
+    axios.get(`${backEndUrl}/users`,{
       withCredentials:true,
     }).then(res=>{
       setUser(res.data.user);
