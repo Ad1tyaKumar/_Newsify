@@ -20,7 +20,7 @@ import SportsCricketIcon from '@mui/icons-material/SportsCricket';
 
 const options = ['IPL', 'Virat Kohli','abc','medha','politics','trump','war','world','local','modi'];
 const Navbar = () => {
-  const [value, setValue] = React.useState(options[0]);
+  const [value, setValue] = React.useState("");
   const [inputValue, setInputValue] = React.useState('');
   const [region, setRegion] = React.useState('');
   const handleChange = (event) => {
