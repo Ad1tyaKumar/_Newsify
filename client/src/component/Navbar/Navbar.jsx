@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "../Navbar/navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Weather from "../../pages/HomePage/Weather";
 import Backdrop from "@mui/material/Backdrop";
 import Button from "@mui/material/Button";
@@ -14,7 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-
+import backEndUrl from "../../host";
 const options = ['IPL', 'Virat Kohli','abc','medha','politics','trump','war'];
 const Navbar = () => {
   const [value, setValue] = React.useState(options[0]);
@@ -23,14 +23,29 @@ const Navbar = () => {
   const handleChange = (event) => {
     setRegion(event.target.value);
   };
-
   const geolocation = useGeoLocation();
+  const pathClasses = [
+    { path: '/', class: 'nav-link link' },
+    { path: '/team', class: 'nav-link link' },
+    { path: '/savedarticle', class: 'nav-link link' },
+  ];
+
+  const location = useLocation().pathname;
+  if(location==='/'){
+    pathClasses[0].class+=' current';
+  }
+  else if(location==='/team'){
+    pathClasses[1].class+=' current';
+  }
+  else if(location==='/savedarticle'){
+    pathClasses[2].class+=' current';
+  }
 
   const { isAuthenticated, setIsAuthenticated, loading, setLoading } =
     useContext(Context);
   const logoutHandler = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/logout", {
+      const { data } = await axios.get(`${backEndUrl}/logout`, {
         withCredentials: true,
       });
       setIsAuthenticated(false);
@@ -45,7 +60,7 @@ const Navbar = () => {
   const [weather, showWeather] = useState(false);
   const [search, setSearch] = useState("");
 
-  console.log(search)
+
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -84,17 +99,17 @@ const Navbar = () => {
           <div class="navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <Link to="/" className="nav-link link">
+                <Link to="/" className={pathClasses[0].class}>
                   Home
                 </Link>
               </li>
               <li class="nav-item">
-                <Link to="/team" className="nav-link link">
+                <Link to="/team" className={pathClasses[1].class}>
                   About
                 </Link>
               </li>
               <li class="nav-item">
-                <Link to="/savednews" className="nav-link link">
+                <Link to="/savednews" className={pathClasses[2].class}>
                   Saved Articles
                 </Link>
               </li>

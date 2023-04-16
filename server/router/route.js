@@ -4,7 +4,6 @@ import User from "../models/auth.js"
 import bcrypt from 'bcrypt'
 import { sendCookie } from "../utils/features.js"
 import jwt from "jsonwebtoken"
-// import passport from 'passport';
 
 
 router.post('/', async (req, res) => {
@@ -33,7 +32,7 @@ router.post('/signup', async (req, res) => {
         return res.json('email exists');
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    user = await User.create({ name, email, password: hashedPassword ,id:[]});
+    user = await User.create({ name, email, password: hashedPassword ,bookmarks:[]});
     sendCookie(user, res, "registered", 201);
 })
 
@@ -41,8 +40,8 @@ router.get('/logout', (req, res) => {
     res.status(200).cookie("token", "",{
         httpOnly: true,
         expires: new Date(Date.now()),
-        sameSite: process.env.NODE_ENV === "Development" ? "lax" : "none",
-        secure: process.env.NODE_ENV === "Development" ? false : true,
+        sameSite:"none",
+        secure:true,
     }
     ).json({
         success: true,
@@ -74,15 +73,11 @@ router.post('/book',async(req,res)=>{
                 message:"Login First",
             });
         }
-        const {savedId}=req.body;
-        console.log('Booked');
-        console.log(savedId)
+        const {i}=req.body;
         const decoded= jwt.verify(token,'akdlfjladjf');
         const user =await User.findById(decoded._id);
-        await user.updateOne({$push:{id:savedId}});
-        await user.save()
-        // await user.id.push(savedId);
-        // user.id.push(savedId);
+        await user.updateOne({$push:{bookmarks:i}});
+        await user.save();
         console.log(user)
         res.status(200).json({
             success:true,
@@ -96,13 +91,11 @@ router.post('/book',async(req,res)=>{
 router.post('/unbook',async(req,res)=>{
     try {
         const {token}=req.cookies;
-        const {savedId}=req.body;
+        const {i}=req.body;
         const decoded=jwt.verify(token,'akdlfjladjf');
         const user =await User.findById(decoded._id);
         console.log('Unbooked');
-        console.log(savedId);
-        await user.updateOne({$pull:{id:savedId}});
-        console.log(user);
+        await user.updateOne({$pull:{"bookmarks":{Headline:i.Headline}}});
         res.status(200).json({
             success:true,
             message:'unbooked'
@@ -116,24 +109,5 @@ router.post('/unbook',async(req,res)=>{
         
     }
 })
-
-// router.get('/login/success',(req,res)=>{
-//     if(req.user){
-//         sendCookie(req.user, res, "matched", 200);
-//     }
-// })
-
-// router.get('/login/failed',(req,res)=>{
-//     res.status(401).json({
-//         success:false,
-//         message:'failure'
-//     })
-// })
-
-// router.get('/google',passport.authenticate('google',{scope:["profile"]}));
-// router.get('/google/callback',passport.authenticate('google',{
-//     successRedirect:'/login/success',
-//     failureRedirect:'/login/failed'
-// }))
 
 export default router;

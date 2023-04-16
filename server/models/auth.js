@@ -1,5 +1,19 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
+
+const bookmarkSchema = new mongoose.Schema({
+    Article:String,
+    Headline:String,
+    Keywords:[{
+        type:String
+    }],
+    Publish_Date:String,
+    Sentiment:String,
+    TextClassification:String,
+    images:String,
+    summary:String
+})
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -18,9 +32,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
     },
-    id:[{
-        type:Number
-    }]
+    bookmarks:[bookmarkSchema]
 })
 
 const User = mongoose.model('User', userSchema);

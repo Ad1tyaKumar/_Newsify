@@ -3,25 +3,18 @@ import express from "express"
 import cors from "cors"
 import router from "./router/route.js"
 import cookieParser from "cookie-parser"
-// import connDB from "./db/conn.js"
 import connectDB from "./db/conn.js"
 import  dotenv,{config} from "dotenv"
-// import passport from "passport"
-// const dotenv = require("dotenv");
+
 
 const app = express();
-// connDB();
 
 //middle wares
-
 config({
-    path:'./db/.env'
+    path:'./.env'
 })
-
 app.use(cookieParser());
 app.use(express.json());
-// app.use(passport.initialize());
-// app.use(passport.session());
 app.use(cors({
     origin:'http://localhost:3000',
     methods:["GET","POST","PUT","DELETE"],

@@ -12,7 +12,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Context } from "../..";
 import jsn from '../../dummy.json'
-
+import backEndUrl from "../../host";
 const CarouselComponent = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,11 +20,11 @@ const CarouselComponent = () => {
   const [saved, setSaved] = useState(false);
   const history = useNavigate();
   const { isAuthenticated } = useContext(Context);
-  const handleClick = (savedId) => {
+  const handleClick = (i) => {
     
-    console.log(savedId)
+    console.log(i)
     if (!saved) {
-      axios.post('http://localhost:4000/book', { savedId }, { withCredentials: true }).then((res) => {
+      axios.post(`${backEndUrl}/book`, { i }, { withCredentials: true }).then((res) => {
         if (res.data.message === 'Login First') {
           history('/login');
         }
@@ -33,7 +33,7 @@ const CarouselComponent = () => {
         }
       }).catch((e) => { console.log(e); })
     } else {
-      axios.post('http://localhost:4000/unbook', { savedId }, { withCredentials: true }).then((res) => {
+      axios.post(`${backEndUrl}/unbook`, { i }, { withCredentials: true }).then((res) => {
         setSaved(false);
       }).catch((e) => {
         console.log(e);
@@ -43,12 +43,13 @@ const CarouselComponent = () => {
 
   const fetchdata = async () => {
     setLoading(true);
-    await fetch("https://amiteshpatel.pythonanywhere.com/search/ipl")
-      .then((response) => {
-        return response.json();
-      })
-      .then((res) => {
-        const data = Object.values(res);
+    // await fetch("https://amiteshpatel.pythonanywhere.com/search/ipl")
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((res) => {
+
+        const data = Object.values(jsn);
         var temp = [];
 
         for (let i = 0; i < data.length; i++) {
@@ -56,10 +57,10 @@ const CarouselComponent = () => {
         }
         setPosts([...temp]);
         setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      // })
+      // .catch((err) => {
+      //   console.log(err.message);
+      // });
   };
 
   useEffect(() => {
@@ -67,7 +68,6 @@ const CarouselComponent = () => {
   }, []);
 
   useEffect(() => {
-    console.log(posts);
   }, [posts]);
   return (
     <div className="mb-5">
@@ -149,7 +149,7 @@ const CarouselComponent = () => {
                             </h5>
                           </div>
                           <div>
-                            <button onClick={() => handleClick(i.id)}>
+                            <button onClick={() => handleClick(i)}>
                               <i
                                 className={`fa-${saved ? "solid" : "regular"
                                   } fa-bookmark fa-xl ml-2`}
