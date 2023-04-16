@@ -36,7 +36,9 @@ export default function Detail(props) {
   const fetchdata = async () => {
     setLoading(true);
     try {
-      const res = await fetch("https://amiteshpatel.pythonanywhere.com/search/ipl");
+      const res = await fetch(
+        "https://amiteshpatel.pythonanywhere.com/search/ipl"
+      );
       const datauser = await res.json();
       const dataaa = Object.values(datauser);
       for (var i = 0; i < dataaa.length; i++) {
@@ -46,8 +48,7 @@ export default function Detail(props) {
           setLoading(false);
         }
       }
-    } 
-    catch (err) {
+    } catch (err) {
       console.log(err.message);
     }
   };
@@ -56,14 +57,14 @@ export default function Detail(props) {
     fetchdata();
     console.log(data);
     // console.log(data.length);
-  },[]);
+  }, []);
 
   return (
     <>
       <Navbar />
 
       <div class="card flex justify-center items-center m-4 shadow-xl outline-double">
-      {loading && <Spinner />}
+        {loading && <Spinner />}
         <img
           src={data.images}
           class="card-img-top w-1/2 shadow-2xl my-1 rounded-lg"
@@ -76,11 +77,24 @@ export default function Detail(props) {
           <p class="card-text font-medium text-base leading-7 tracking-wide	">
             {data.Article}
           </p>
-          <p class="card-text font-bold text-lg my-2 w3-xlarge">
-            Sentiment - {data.Sentiment}
+          <p className="text-xl font-bold ">
+            Sentiment :{" "}
+            <span
+              className="text-xl font-bold "
+              style={{
+                color:
+                  data.Sentiment === "Positive"
+                    ? "green"
+                    : data.Sentiment === "negative"
+                    ? "red"
+                    : "grey",
+              }}
+            >
+              {data.Sentiment}
+            </span>
           </p>
-          <p class="card-text font-bold text-lg my-2 w3-xlarge">
-            Text Classification - {data.TextClassification}
+          <p className="text-xl font-bold">
+            TextClassification : {data.TextClassification}
           </p>
           <p class="card-text">
             <small class="text-muted">Last updated 3 mins ago</small>

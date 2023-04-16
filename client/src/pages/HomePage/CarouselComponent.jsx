@@ -11,8 +11,9 @@ import Spinner from "./Spinner";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Context } from "../..";
-import jsn from '../../dummy.json'
+import jsn from "../../dummy.json";
 import backEndUrl from "../../host";
+import { grey } from "@mui/material/colors";
 const CarouselComponent = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,23 +22,29 @@ const CarouselComponent = () => {
   const history = useNavigate();
   const { isAuthenticated } = useContext(Context);
   const handleClick = (i) => {
-    
-    console.log(i)
+    console.log(i);
     if (!saved) {
-      axios.post(`${backEndUrl}/book`, { i }, { withCredentials: true }).then((res) => {
-        if (res.data.message === 'Login First') {
-          history('/login');
-        }
-        else {
-          setSaved(true);
-        }
-      }).catch((e) => { console.log(e); })
+      axios
+        .post(`${backEndUrl}/book`, { i }, { withCredentials: true })
+        .then((res) => {
+          if (res.data.message === "Login First") {
+            history("/login");
+          } else {
+            setSaved(true);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } else {
-      axios.post(`${backEndUrl}/unbook`, { i }, { withCredentials: true }).then((res) => {
-        setSaved(false);
-      }).catch((e) => {
-        console.log(e);
-      })
+      axios
+        .post(`${backEndUrl}/unbook`, { i }, { withCredentials: true })
+        .then((res) => {
+          setSaved(false);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }
   };
 
@@ -48,7 +55,6 @@ const CarouselComponent = () => {
         return response.json();
       })
       .then((res) => {
-
         const data = Object.values(res);
         var temp = [];
 
@@ -68,7 +74,7 @@ const CarouselComponent = () => {
   }, []);
 
   useEffect(() => {
-    console.log(posts)
+    console.log(posts);
   }, [posts]);
   return (
     <div className="mb-5">
@@ -128,52 +134,56 @@ const CarouselComponent = () => {
             {/* <Card data={posts} /> */}
             {/* {posts.Headline} */}
 
-            {
-              posts.map((i) => {
-                return (
-                  <SwiperSlide >
-                    <div
-                      class="card carousel-card carousel-card"
-                      style={{ width: "90%", height: "38rem" }}
-                    >
-                      <img
-                        src={i.images}
-                        class="card-img-top card-image"
-                        alt="..."
-                        style={{ width: "100%", height: "20rem" }}
-                      />
-                      <div class="card-body">
-                        <div className="d-flex justify-space-between align-items-left flex-row">
-                          <div>
-                            <h5 class="card-title carousel-title">
-                              {i.Headline}
-                            </h5>
-                          </div>
-                          <div>
-                            <button onClick={() => handleClick(i)}>
-                              <i
-                                className={`fa-${saved ? "solid" : "regular"
-                                  } fa-bookmark fa-xl ml-2`}
-                                style={{ color: " #af695c" }}
-                              ></i>
-                            </button>
-                          </div>
+            {posts.map((i) => {
+              return (
+                <SwiperSlide>
+                  <div
+                    class="card carousel-card carousel-card"
+                    style={{ width: "90%", height: "38rem" }}
+                  >
+                    <img
+                      src={i.images}
+                      class="card-img-top card-image"
+                      alt="..."
+                      style={{ width: "100%", height: "20rem" }}
+                    />
+                    <div class="card-body">
+                      <div className="d-flex justify-space-between align-items-left flex-row">
+                        <div>
+                          <h5 class="card-title carousel-title">
+                            {i.Headline}
+                          </h5>
                         </div>
-                        <p class="card-text">{i.summary?.slice(0, 240)}...</p>
-                        {/* <p class="card-text">{i.summary?.slice(0, 240)}...</p> */}
-
-                        <Link to={`/detail?art=${i.id}`}>
-                          <button type="button" class="btn btn-primary card-btn">
-                            Read More
-                            <img src="circle-notch.png" className="notch" />
+                        <div>
+                          <button onClick={() => handleClick(i)}>
+                            <i
+                              className={`fa-${
+                                saved ? "solid" : "regular"
+                              } fa-bookmark fa-xl ml-2`}
+                              style={{ color: " #af695c" }}
+                            ></i>
                           </button>
-                        </Link>
+                        </div>
                       </div>
+                      <p class="card-text">{i.summary?.slice(0, 240)}...</p>
+                      <p className="text-xl font-bold " >
+                        Sentiment : <span className="text-xl font-bold " style={{color: i.Sentiment === 'Positive' ? 'green' : (i.Sentiment === 'negative' ? 'red' : 'grey')}}>{i.Sentiment}</span> 
+                      </p>
+                      <p className="text-xl font-bold">
+                        TextClassification : {i.TextClassification}
+                      </p>
+
+                      <Link to={`/detail?art=${i.id}`}>
+                        <button type="button" class="btn btn-primary card-btn">
+                          Read More
+                          <img src="circle-notch.png" className="notch" />
+                        </button>
+                      </Link>
                     </div>
-                  </SwiperSlide>
-                );
-              })
-            }
+                  </div>
+                </SwiperSlide>
+              );
+            })}
           </>
         }
       </Swiper>

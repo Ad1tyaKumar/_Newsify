@@ -55,27 +55,53 @@ export default function Region() {
       <h1 className="w3-xxxlarge d-flex align-items-center justify-center">{`${url} NEWS`}</h1>
       {loading && <Spinner />}
       {posts.map((i) => {
-        return <div className="card mb-3 m-5 mx-10 w3-border w3-border-black" style={{height:"35%",width:"80%"}} >
-    <div className="row g-0">
-      <div className="col-md-4"> <img src={i.images} style={{height:"100%"}}/>
-      </div>
-      <div className="col-md-8">
-        <div className="card-body">
-          <h5 className="card-title w3-xlarge">{i.Headline}</h5>
-          <p className="card-text w3-large">
-          {i.summary?.slice(0, 240)}...
-          </p>
-          <p className="card-text">
-            <small className="text-body-secondary">Sentiment: {i.Sentiment}</small><Link to="/detail"><button type="button" class="btn btn-primary card-btn">Read More</button></Link>
-          </p>
-          
-        </div>
-        
-      </div>
-      
-    </div>
-    
-  </div>
+        return (
+          <div
+            className="card mb-3 m-5 mx-10 w3-border w3-border-black"
+            style={{ height: "35%", width: "80%" }}
+          >
+            <div className="row g-0">
+              <div className="col-md-4">
+                {" "}
+                <img src={i.images} style={{ height: "100%" }} />
+              </div>
+              <div className="col-md-8">
+                <div className="card-body">
+                  <h5 className="card-title w3-xlarge">{i.Headline}</h5>
+                  <p className="card-text w3-large">
+                    {i.summary?.slice(0, 240)}...
+                  </p>
+                  <p className="card-text">
+                    <p className="text-xl font-bold ">
+                      Sentiment :{" "}
+                      <span
+                        className="text-xl font-bold "
+                        style={{
+                          color:
+                            i.Sentiment === "Positive"
+                              ? "green"
+                              : i.Sentiment === "negative"
+                              ? "red"
+                              : "grey",
+                        }}
+                      >
+                        {i.Sentiment}
+                      </span>
+                    </p>
+                    <p className="text-xl font-bold">
+                      TextClassification : {i.TextClassification}
+                    </p>
+                    <Link to="/detail">
+                      <button type="button" class="btn btn-primary card-btn">
+                        Read More
+                      </button>
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
       })}
       {/* <Cardsearch/>
     <Cardsearch/>

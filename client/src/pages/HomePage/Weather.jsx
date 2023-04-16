@@ -31,7 +31,7 @@ const Weather = ({ weatherda }) => {
               >
                 <div className="bg-image" style={{ borderRadius: "35px" }}>
                   <MDBCardImage
-                    src="https://www.canva.com/design/DAFgQgXiy-k/bNKeVJDmT7dyy_7etGob2A/view?utm_content=DAFgQgXiy-k&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink"
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/draw1.webp"
                     className="card-img"
                     alt="weather"
                   />
