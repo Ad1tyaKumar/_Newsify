@@ -57,6 +57,7 @@ export default function Login() {
           setLoading(false);
         });
     } catch (e) {
+      console.log('h');
       setIsAuthenticated(false);
       setLoading(false);
       console.log(e);

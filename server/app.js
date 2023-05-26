@@ -9,6 +9,7 @@ import  dotenv,{config} from "dotenv"
 
 const app = express();
 
+// console.log(process.env.FRONTEND_URL);
 //middle wares
 config({
     path:'./.env'

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../Navbar/navbar.css";
 import { Link, useLocation } from "react-router-dom";
 import Weather from "../../pages/HomePage/Weather";
@@ -18,7 +18,7 @@ import backEndUrl from "../../host";
 import Fab from '@mui/material/Fab';
 import SportsCricketIcon from '@mui/icons-material/SportsCricket';
 
-const options = ['IPL', 'Virat Kohli','abc','medha','politics','trump','war','world','local','modi'];
+const options = ['IPL', 'Virat Kohli', 'abc', 'medha', 'politics', 'trump', 'war', 'world', 'local', 'modi'];
 const Navbar = () => {
   const [value, setValue] = React.useState("");
   const [inputValue, setInputValue] = React.useState('');
@@ -34,18 +34,36 @@ const Navbar = () => {
   ];
 
   const location = useLocation().pathname;
-  if(location==='/'){
-    pathClasses[0].class+=' current';
+  if (location === '/') {
+    pathClasses[0].class += ' current';
   }
-  else if(location==='/team'){
-    pathClasses[1].class+=' current';
+  else if (location === '/team') {
+    pathClasses[1].class += ' current';
   }
-  else if(location==='/savedarticle'){
-    pathClasses[2].class+=' current';
+  else if (location === '/savedarticle') {
+    pathClasses[2].class += ' current';
   }
 
-  const { isAuthenticated, setIsAuthenticated, loading, setLoading } =
+  const { isAuthenticated, setIsAuthenticated, setUser,loading, setLoading } =
     useContext(Context);
+  useEffect(() => {
+    axios.get(`${backEndUrl}/users`, {
+      withCredentials: true,
+    }).then(res => {
+      setUser(res.data.user);
+      if (res.data.success === true) {
+        console.log('gfdgdf');
+        setIsAuthenticated(true);
+      }
+      else {
+        setUser({})
+        setIsAuthenticated(false);
+      }
+    }).catch((e) => {
+      console.log(e);
+      setIsAuthenticated(false);
+    })
+  },[])
   const logoutHandler = async () => {
     try {
       const { data } = await axios.get(`${backEndUrl}/logout`, {
@@ -178,8 +196,8 @@ const Navbar = () => {
             </a>
 
             <Link to="https://www.espncricinfo.com/live-cricket-score"><Box sx={{ '& > :not(style)': { m: 1 } }}><Fab variant="extended" color="black" aria-label="add">
-        <SportsCricketIcon sx={{ mr: 1 }} />
-      </Fab></Box></Link>
+              <SportsCricketIcon sx={{ mr: 1 }} />
+            </Fab></Box></Link>
 
             <Backdrop
               sx={{
@@ -192,10 +210,10 @@ const Navbar = () => {
               {weather && <Weather weatherda={weatherda} />}
             </Backdrop>
           </div>
-          
+
         </div>
       </nav>
-      
+
       {/* <Cricket/> */}
     </div>
   );

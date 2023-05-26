@@ -14,23 +14,7 @@ import Region from "./pages/Region/Region";
 import backEndUrl from "./host";
 function App() {
   const {setUser,setIsAuthenticated}=useContext(Context);
-  useEffect(()=>{
-    axios.get(`${backEndUrl}/users`,{
-      withCredentials:true,
-    }).then(res=>{
-      setUser(res.data.user);
-      if(res.data.success===true){
-        setIsAuthenticated(true);
-      }
-      else{
-        setUser({})
-        setIsAuthenticated(false);
-      }
-    }).catch((e)=>{
-      console.log(e);
-      setIsAuthenticated(false);
-    })
-  })
+  
   return (
     <>
       <Router>

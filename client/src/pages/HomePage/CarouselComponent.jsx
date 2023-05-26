@@ -14,38 +14,34 @@ import { Context } from "../..";
 import jsn from "../../dummy.json";
 import backEndUrl from "../../host";
 import { grey } from "@mui/material/colors";
+
+// Toastify
+import {toast,ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 const CarouselComponent = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   // const [savedId, setSavedId] = useState();
-  const [saved, setSaved] = useState(false);
+  // const [saved, setSaved] = useState(false);
   const history = useNavigate();
   const { isAuthenticated } = useContext(Context);
   const handleClick = (i) => {
-    console.log(i);
-    if (!saved) {
+    
       axios
         .post(`${backEndUrl}/book`, { i }, { withCredentials: true })
         .then((res) => {
           if (res.data.message === "Login First") {
             history("/login");
-          } else {
-            setSaved(true);
+          }
+          else{
+            toast.success("Saved Successfully");
           }
         })
         .catch((e) => {
           console.log(e);
         });
-    } else {
-      axios
-        .post(`${backEndUrl}/unbook`, { i }, { withCredentials: true })
-        .then((res) => {
-          setSaved(false);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
+
   };
 
   const fetchdata = async () => {
@@ -73,9 +69,9 @@ const CarouselComponent = () => {
     fetchdata();
   }, []);
 
-  useEffect(() => {
-    console.log(posts);
-  }, [posts]);
+  // useEffect(() => {
+  //   console.log(posts);
+  // }, [posts]);
   return (
     <div className="mb-5">
       {loading && <Spinner />}
@@ -157,9 +153,7 @@ const CarouselComponent = () => {
                         <div>
                           <button onClick={() => handleClick(i)}>
                             <i
-                              className={`fa-${
-                                saved ? "solid" : "regular"
-                              } fa-bookmark fa-xl ml-2`}
+                              className={`fa-regular fa-floppy-disk fa-xl ml-2`}
                               style={{ color: " #af695c" }}
                             ></i>
                           </button>
@@ -187,6 +181,7 @@ const CarouselComponent = () => {
             })}
           </>
         }
+        <ToastContainer/>
       </Swiper>
     </div>
   );
