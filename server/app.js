@@ -16,8 +16,9 @@ config({
 })
 app.use(cookieParser());
 app.use(express.json());
+const frontEndURL=process.env.FRONTEND_URL;
 app.use(cors({
-    origin:process.env.FRONTEND_URL,
+    origin:frontEndURL,
     methods:["GET","POST","PUT","DELETE"],
     credentials:true,
 }))

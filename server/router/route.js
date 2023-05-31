@@ -57,7 +57,7 @@ router.get('/users', async (req, res) => {
             message: "Login First",
         });
     }
-    const decoded = jwt.verify(token, 'akdlfjladjf');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded._id);
     res.status(200).json({
         success: true,
@@ -75,7 +75,7 @@ router.post('/book', async (req, res) => {
             });
         }
         const { i } = req.body;
-        const decoded = jwt.verify(token, 'akdlfjladjf');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded._id);
         await user.updateOne({ $push: { bookmarks: i } });
         await user.save();
@@ -92,7 +92,7 @@ router.post('/unbook', async (req, res) => {
     try {
         const { token } = req.cookies;
         const { i } = req.body;
-        const decoded = jwt.verify(token, 'akdlfjladjf');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded._id);
         console.log('Unbooked');
         await user.updateOne({ $pull: { "bookmarks": { Headline: i.Headline } } });
@@ -120,7 +120,7 @@ router.get('/saved', async (req, res) => {
             });
         }
         
-        const decoded = jwt.verify(token, 'akdlfjladjf');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded._id);
         res.send(user.bookmarks);
     } catch (e) {
