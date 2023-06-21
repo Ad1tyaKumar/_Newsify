@@ -52,7 +52,6 @@ const Navbar = () => {
     }).then(res => {
       setUser(res.data.user);
       if (res.data.success === true) {
-        console.log('gfdgdf');
         setIsAuthenticated(true);
       }
       else {

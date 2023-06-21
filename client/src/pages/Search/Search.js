@@ -71,7 +71,7 @@ export default function Search() {
 
   return (
     <div className="searchpage">
-      <Navbar />
+      {/* <Navbar /> */}
       <h1 className="w3-xxlarge m-5">SEARCH RESULTS</h1>
       <h1 className="w3-xlarge mx-5">{title}</h1>
       {loading && <Spinner />}
@@ -134,7 +134,8 @@ export default function Search() {
         <Cardsearch/>
         <Cardsearch/>
         <Cardsearch/>
-        <Footer/> */}
+       */}
+       <Footer/> 
     </div>
   );
 }

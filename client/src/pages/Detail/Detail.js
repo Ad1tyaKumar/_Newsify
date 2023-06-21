@@ -61,7 +61,7 @@ export default function Detail(props) {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div class="card flex justify-center items-center m-4 shadow-xl outline-double">
         {loading && <Spinner />}

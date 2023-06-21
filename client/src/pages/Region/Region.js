@@ -51,7 +51,7 @@ export default function Region() {
   useEffect(() => {}, [posts]);
   return (
     <div className="region">
-      <Navbar />
+      {/* <Navbar /> */}
       <h1 className="w3-xxxlarge d-flex align-items-center justify-center">{`${url} NEWS`}</h1>
       {loading && <Spinner />}
       {posts.map((i) => {

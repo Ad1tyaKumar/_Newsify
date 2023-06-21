@@ -1,3 +1,3 @@
-const backEndUrl='https://newsify-63a5.onrender.com';
+const backEndUrl='http://newsify-63a5.onrender.com';
 
 export default backEndUrl;

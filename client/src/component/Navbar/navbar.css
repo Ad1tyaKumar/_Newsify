@@ -1,7 +1,14 @@
+*{
+    padding: 0;
+    margin: 0;
+}
 .title{
     font-size: 2.5rem;
     padding: 2 1.2rem ;
     font-weight: 500;
+}
+.total{
+    margin-bottom: 0;
 }
 .mainNav{
     padding: 0;

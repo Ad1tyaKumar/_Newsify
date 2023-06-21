@@ -51,7 +51,7 @@ const SavedNews = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="mb-5">
         {loading && <Spinner />}

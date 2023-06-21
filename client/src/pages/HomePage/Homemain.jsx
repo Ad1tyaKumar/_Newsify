@@ -14,7 +14,7 @@ function Homemain() {
   return (
     <>
       <div className="main">
-        <Navbar />
+        {/* <Navbar /> */}
         <h1 className="w3-cursive w3-xlarge m-2">Hola {`${!user.name ? "Guest User": user.name}`}🤝!!!!</h1>
         <NavbarSec />
       </div>

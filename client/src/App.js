@@ -12,12 +12,16 @@ import { Context } from ".";
 import axios from "axios";
 import Region from "./pages/Region/Region";
 import backEndUrl from "./host";
+import Navbar from "./component/Navbar/Navbar";
+
+import './App.css'
 function App() {
   const {setUser,setIsAuthenticated}=useContext(Context);
   
   return (
     <>
       <Router>
+      <Navbar />
         <Routes>
           <Route path="/" element={<Homemain/>}/>
           <Route path="/login" element={<Login />} />
@@ -30,6 +34,7 @@ function App() {
           <Route path='*' element={<Error />} />
         </Routes>
       </Router>
+      
     </>
   );
 }

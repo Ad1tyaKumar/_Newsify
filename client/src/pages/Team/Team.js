@@ -8,7 +8,7 @@ import Footer from "../../component/Footer/Footer";
 export default function Team() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="container">
         <div class="row">
           <div class="col-3  mx-auto my-12 w-fit">
