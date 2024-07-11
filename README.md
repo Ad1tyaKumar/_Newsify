@@ -10,6 +10,7 @@ A text classification system that can classify a given news headline in one or m
 -   [Medha Tripathi](https://github.com/medha-tripathi): Role (Frontend)
 -   [Richesh Kunwar](https://github.com/richesh27): Role (Frontend)
 -    [Aditya Kumar](https://github.com/Ad1tyaKumar): Role (Backend)
+-    [Nilesh Kumar Kamal](https://github.com/kamal9580): Role (Backend)
 
 ## Idea and approach
 
